@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: prefect-server
+    env: docker
+    plan: free
+    region: oregon
+    autoDeploy: true
+    envVars:
+      - key: PREFECT_API_URL
+        value: http://0.0.0.0:4200/api
