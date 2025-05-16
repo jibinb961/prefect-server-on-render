@@ -6,5 +6,7 @@ services:
     region: oregon
     autoDeploy: true
     envVars:
+      - key: PORT
+        value: 4200  # Render expects to detect this port open
       - key: PREFECT_API_URL
         value: http://0.0.0.0:4200/api

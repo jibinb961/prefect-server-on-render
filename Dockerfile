@@ -1,11 +1,10 @@
-# Use Prefect's maintained Docker image
 FROM prefecthq/prefect:3-latest
 
-# Set the API URL so Prefect knows where it’s hosted
-ENV PREFECT_API_URL=http://0.0.0.0:4200/api
+# Use the same port that Render expects
+ENV PORT=4200
+ENV PREFECT_API_URL=http://0.0.0.0:$PORT/api
 
-# Expose the UI/API port
-EXPOSE 4200
+EXPOSE $PORT
 
-# Start the Prefect 2.x server
-CMD ["prefect", "server", "start", "--host", "0.0.0.0"]
+# Use shell to expand the $PORT variable at runtime
+CMD ["sh", "-c", "prefect server start --host 0.0.0.0 --port $PORT"]
